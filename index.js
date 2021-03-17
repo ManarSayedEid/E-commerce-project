@@ -17,9 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.get('/', (req,res) =>{
-    res.send('hello from heroku')
-})
+// app.get('/', (req,res) =>{
+//     res.send('hello from heroku')
+// })
 
 
 // app.use(validator());
