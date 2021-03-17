@@ -23,7 +23,7 @@ app.use(express.json());
 
 
 // set routes
-const admin = require('./routes/admin');
+// const admin = require('./routes/admin');
 // const pages = require('./routes/pages');
 const product = require('./routes/product');
 const user = require('./routes/user');
@@ -32,7 +32,7 @@ const user = require('./routes/user');
 
 
 //set end points
-app.use('/admin', admin);
+// app.use('/admin', admin);
 app.use('/home/product', product);
 app.use('/user', user);
 

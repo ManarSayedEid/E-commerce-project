@@ -10,7 +10,7 @@ module.exports = (req,res, next) =>{
         next();
         
     } catch (error) {
-        res.send('Please Login again with correct data');
+        res.send('Please try sign in again with correct data!');
     }
 
 }

@@ -21,6 +21,11 @@ const schema = mongoose.Schema({
     image:{
         data: Buffer,
         contentType: String
+    },
+    isAdmin: {
+        type: Boolean,
+        // required: true,
+        default: false
     }
 })
 
