@@ -17,9 +17,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
+app.get('/', (req,res) =>{
+    res.send('hello from heroku')
+})
+
+
 // app.use(validator());
 // app.set('view engine', 'ejs');
-// app.use(express.static('public'));
+app.use(express.static('public'));
 
 
 // set routes
