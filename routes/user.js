@@ -214,24 +214,25 @@ router.get("/:id", auth , isAdmin, async (req, res) => {
 // })
 
 
-// // delete a user
-// router.delete("/:id", isLoggedIn, Admin, async (req, res) => {
-//     try {
-//         const user = await User.findById(req.params.id);
+// delete a user by id
+router.delete("/:id", auth, isAdmin, async (req, res) => {
+    try {
 
-//         if (!user) {
-//             res.status(404);
-//             throw new Error("User doesn't exist");
-//         }
+        const user = await User.findById(req.params.id).exec();
 
-//         const deletedUser = await User.findByIdAndDelete(req.params.id);
+        if (!user) {
+            res.status(404);
+            throw new Error("User doesn't exist");
+        }
 
-//         res.json({ deletedUser: deletedUser });
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
 
-//     } catch (err) {
-//         res.json({ error: err.message });
-//     }
-// })
+        res.json({ deletedUser: deletedUser });
+
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+})
 
 
 
@@ -252,10 +253,10 @@ router.get("/:id", auth , isAdmin, async (req, res) => {
 
 
 // testing //////////////////////////////
-router.delete('/', auth, isAdmin, async (req, res) => {
-    await User.deleteMany({});
-    res.send('deleted sucessfully');
-})
+// router.delete('/', auth, isAdmin, async (req, res) => {
+//     await User.deleteMany({});
+//     res.send('deleted sucessfully');
+// })
 ////////////////////////////////////////
 
 

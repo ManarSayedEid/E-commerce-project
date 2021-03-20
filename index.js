@@ -32,12 +32,15 @@ app.use(express.static('public'));
 // const pages = require('./routes/pages');
 const product = require('./routes/product');
 const user = require('./routes/user');
+const order = require('./routes/order');
+
 
 
 
 
 //set end points
 // app.use('/admin', admin);
+app.use('/order', order);
 app.use('/home/product', product);
 app.use('/user', user);
 
