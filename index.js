@@ -3,7 +3,8 @@ const app = express();
 
 const validator = require('express-validator');
 
-
+const cors = require('cors');
+app.use(cors);
 
 // connect to monoDB
 require('./connection');
@@ -33,8 +34,6 @@ app.use(express.static('public'));
 const product = require('./routes/product');
 const user = require('./routes/user');
 const order = require('./routes/order');
-
-
 
 
 
