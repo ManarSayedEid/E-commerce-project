@@ -4,7 +4,7 @@ const app = express();
 const validator = require('express-validator');
 
 const cors = require('cors');
-app.use(cors);
+app.use(cors());
 
 // connect to monoDB
 require('./connection');
