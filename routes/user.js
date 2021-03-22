@@ -152,9 +152,9 @@ router.patch("/profile", auth, async (req, res) => {
 // ADMIN PARTS
 
 // get all users
-router.get("/", auth , isAdmin, async (req, res) => {
+router.get("/", auth, isAdmin, async (req, res) => {
     try {
-        const users = await User.find({}, {password: 0}).exec();
+        const users = await User.find({}, { password: 0 }).exec();
         res.status(200).json({ users: users })
     } catch (err) {
         res.json({ error: err.message })
@@ -163,7 +163,7 @@ router.get("/", auth , isAdmin, async (req, res) => {
 
 
 // get a user by id
-router.get("/:id", auth , isAdmin, async (req, res) => {
+router.get("/:id", auth, isAdmin, async (req, res) => {
     try {
         const user = await User.findById(req.params.id).exec();
 
@@ -180,38 +180,51 @@ router.get("/:id", auth , isAdmin, async (req, res) => {
 
 
 // // update a user
-// router.put("/:id", isLoggedIn, Admin, async (req, res) => {
-//     try {
-//         const user = await User.findById(req.params.id);
+router.patch("/:id", auth, isAdmin, async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
 
-//         if (!user) {
-//             res.status(404);
-//             throw new Error("User doesn't exist");
-//         }
+        if (!user) {
+            res.status(404);
+            throw new Error("User doesn't exist");
+        }
 
-//         const { name, email, isAdmin } = req.body;
+        const { username, email, isAdmin } = req.body;
 
-//         user.name = name || user.name;
-//         user.email = email || user.email;
-//         user.isAdmin = isAdmin
+        if (username)
+            user.username = username;
+
+        if (email) {
+            if (await User.findOne({ email })) {
+                throw new Error("Email has been taken.")
+            }
+            else
+                user.email = email;
+        }
+
+        
+        if (isAdmin)
+            user.isAdmin= isAdmin;
+
+      
 
 
-//         const updatedUser = await user.save();
+        const updatedUser = await user.save();
 
-//         res.json({
-//             user: {
-//                 _id: updatedUser._id,
-//                 name: updatedUser.name,
-//                 email: updatedUser.email,
-//                 idAdmin: updatedUser.isAdmin,
-//             }
-//         });
-//     } catch (err) {
-//         res.json({
-//             error: err.message
-//         })
-//     }
-// })
+        res.json({
+            user: {
+                _id: updatedUser._id,
+                name: updatedUser.username,
+                email: updatedUser.email,
+                idAdmin: updatedUser.isAdmin,
+            }
+        });
+    } catch (err) {
+        res.json({
+            error: err.message
+        })
+    }
+})
 
 
 // delete a user by id

@@ -45,6 +45,8 @@ router.post("/", auth, isAdmin, async(req, res) => {
         const product = await Product.create({ price, title, imagePath, description
         });
 
+        
+
         res.status(201).json({
             product: product
         });
@@ -58,38 +60,35 @@ router.post("/", auth, isAdmin, async(req, res) => {
 
 // update product
 
-// router.put("/:id", auth, isAdmin, async(req, res) => {
-//     try {
-//         const product = await Product.findById(req.params.id);
+router.patch("/:id", auth, isAdmin, async(req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
 
-//         if (!product) {
-//             res.status(404).json({
-//                 error: "Product not found"
-//             });
-//         }
+        if (!product) {
+            res.status(404).json({
+                error: "Product not found"
+            });
+        }
 
-//         const { title, imagePath, description, price } = req.body;
+        const { title, imagePath, description, price } = req.body;
 
-//         product.name = name;
-//         product.image = image;
-//         product.brand = brand;
-//         product.category = category;
-//         product.description = description;
-//         product.price = price;
-//         product.countInStock = countInStock
+        product.title = title;
+        product.imagePath = imagePath;
+        product.description = description;
+        product.price = price;
 
-//         const updatedProduct = await product.save();
+        const updatedProduct = await product.save();
 
-//         res.status(200).json({
-//             product: updatedProduct
-//         });
+        res.status(200).json({
+            product: updatedProduct
+        });
 
-//     } catch (err) {
-//         res.json({
-//             error: err.message
-//         });
-//     }
-// })
+    } catch (err) {
+        res.json({
+            error: err.message
+        });
+    }
+})
 
 
 

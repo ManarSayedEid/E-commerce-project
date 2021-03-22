@@ -46,7 +46,35 @@ const products =
                 title: 'Coat',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 price: '50'
-            })
+            }),
+            new Product(
+                {
+                    imagePath: 'https://cdn1.blovcdn.com/bloglovin/aHR0cCUzQSUyRiUyRjQxLm1lZGlhLnR1bWJsci5jb20lMkYwOTNhNWE3ZWFiYzJlZDBkZmQ0MWFhOTY5OThlMDNkOSUyRnR1bWJscl9vNGJqbzMyTTRFMXJzeWFlcG8xXzUwMC5wbmc=?checksum=1e3ad29e03a3a346026c52931b494db98774a19e&format=j',
+                    title: 'Coat',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    price: '50'
+                }),
+            new Product(
+                {
+                    imagePath: 'https://cdn1.blovcdn.com/bloglovin/aHR0cCUzQSUyRiUyRjQxLm1lZGlhLnR1bWJsci5jb20lMkYwOTNhNWE3ZWFiYzJlZDBkZmQ0MWFhOTY5OThlMDNkOSUyRnR1bWJscl9vNGJqbzMyTTRFMXJzeWFlcG8xXzUwMC5wbmc=?checksum=1e3ad29e03a3a346026c52931b494db98774a19e&format=j',
+                    title: 'Coat',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    price: '50'
+                }),
+            new Product(
+                {
+                    imagePath: 'https://cdn1.blovcdn.com/bloglovin/aHR0cCUzQSUyRiUyRjQxLm1lZGlhLnR1bWJsci5jb20lMkYwOTNhNWE3ZWFiYzJlZDBkZmQ0MWFhOTY5OThlMDNkOSUyRnR1bWJscl9vNGJqbzMyTTRFMXJzeWFlcG8xXzUwMC5wbmc=?checksum=1e3ad29e03a3a346026c52931b494db98774a19e&format=j',
+                    title: 'Coat',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    price: '50'
+                }),
+            new Product(
+                {
+                    imagePath: 'https://cdn1.blovcdn.com/bloglovin/aHR0cCUzQSUyRiUyRjQxLm1lZGlhLnR1bWJsci5jb20lMkYwOTNhNWE3ZWFiYzJlZDBkZmQ0MWFhOTY5OThlMDNkOSUyRnR1bWJscl9vNGJqbzMyTTRFMXJzeWFlcG8xXzUwMC5wbmc=?checksum=1e3ad29e03a3a346026c52931b494db98774a19e&format=j',
+                    title: 'Coat',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    price: '50'
+                })
     ]
 
     //
