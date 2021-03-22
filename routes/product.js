@@ -41,8 +41,8 @@ router.get("/:id", async(req, res) => {
 
 router.post("/", auth, isAdmin, async(req, res) => {
     try {
-        const { price, title, imagePath, description } = req.body;
-        const product = await Product.create({ price, title, imagePath, description
+        const { price, title, imagePath, description, quantity } = req.body;
+        const product = await Product.create({ price, title, imagePath, description, quantity
         });
 
         
@@ -70,12 +70,13 @@ router.patch("/:id", auth, isAdmin, async(req, res) => {
             });
         }
 
-        const { title, imagePath, description, price } = req.body;
+        const { title, imagePath, description, price, quantity } = req.body;
 
         product.title = title;
         product.imagePath = imagePath;
         product.description = description;
         product.price = price;
+        product.quantity = quantity;
 
         const updatedProduct = await product.save();
 

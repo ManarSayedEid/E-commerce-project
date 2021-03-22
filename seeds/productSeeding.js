@@ -24,35 +24,40 @@ const products =
                 imagePath: 'https://cdn.shopify.com/s/files/1/0499/3079/7217/products/XKK-AW21-017-BLACK_2_720x.jpg?v=1608734815',
                 title: 'Shoes',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                price: '50'
+                price: '50',
+                quantity: 100
             }),
         new Product(
             {
                 imagePath: 'https://cdn.shopify.com/s/files/1/0499/3079/7217/products/XKK-AW21-018-BLACK_2_720x.jpg?v=1608734826',
                 title: 'Shoes',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                price: '50'
+                price: '50',
+                quantity: 20
             }),
         new Product(
             {
                 imagePath: 'https://cdn.shopify.com/s/files/1/0499/3079/7217/products/TEN-AW21-006-BLACK_2_720x.jpg?v=1608041286',
                 title: 'Shoes',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                price: '50'
+                price: '50',
+                quantity: 18
             }),
         new Product(
             {
                 imagePath: 'https://cdn.shopify.com/s/files/1/0499/3079/7217/products/GER-AW21-006-BLACK_2_720x.jpg?v=1607957683',
                 title: 'Shoes',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                price: '50'
+                price: '50',
+                quantity: 10
             }),
         new Product(
             {
                 imagePath: 'https://cdn.shopify.com/s/files/1/0499/3079/7217/products/PRD-AW21-002-BLACK_2_720x.jpg?v=1607871454',
                 title: 'Shoes',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                price: '50'
+                price: '50',
+                quantity: 6
             })
 
 
