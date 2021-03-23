@@ -29,19 +29,23 @@ app.use(express.static('public'));
 
 
 // set routes
-// const admin = require('./routes/admin');
+
 // const pages = require('./routes/pages');
 const product = require('./routes/product');
 const user = require('./routes/user');
 const order = require('./routes/order');
+const admin = require('./routes/admin.router');
+
 
 
 
 //set end points
-// app.use('/admin', admin);
+
 app.use('/order', order);
 app.use('/home/product', product);
 app.use('/user', user);
+app.use('/admin', admin);
+
 
 
 
