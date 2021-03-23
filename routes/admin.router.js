@@ -12,7 +12,7 @@ const adminBro = new AdminBro({
   databases: [mongoose],
   rootPath: '/admin',
   branding: {
-    logo: 'https://pbs.twimg.com/profile_images/595898041929981952/qBVIEatN_400x400.png',
+    logo: 'https://i.imgur.com/RzODopn.jpeg',
     companyName: 'ShoseHouse',
     softwareBrothers: false   // if Software Brothers logos should be shown in the sidebar footer
   }

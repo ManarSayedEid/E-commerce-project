@@ -10,7 +10,7 @@ const isAdmin = require('../middelware/isAdmin');
 
 
 
-
+/// get cateogry
 router.get('/bags', async (req,res) =>{
 
     const products = await Product.find({category: 'bags' }).exec();
