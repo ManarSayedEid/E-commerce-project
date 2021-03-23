@@ -24,7 +24,7 @@ const schema = mongoose.Schema({
     category: {
         type: String,
         required: [true, "a product must hava a main category"],
-        enum: ["shoes", "bags", "accessories"],
+        enum: ["shoes", "bags", "accessories"]
     }
 })
 
