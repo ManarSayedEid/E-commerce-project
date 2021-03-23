@@ -91,16 +91,23 @@ router.patch("/:id", auth, isAdmin, async(req, res) => {
     }
 })
 
-router.get('/getallbags', async (req,res) =>{
+router.get('/bags', async (req,res) =>{
 
     const products = await Product.find({category: 'bags' }).exec();
 
    res.json(products);
 } );
 
-router.get('/getallshoes', async (req,res) =>{
+router.get('/shoes', async (req,res) =>{
 
-    const products = await Product.find({category: 'shoes' }).exec();
+    const products = await Product.find({}, {category: 'shoes' }).exec();
+
+   res.json(products);
+} );
+
+router.get('/accessories', async (req,res) =>{
+
+    const products = await Product.find({category: "accessories" }).exec();
 
    res.json(products);
 } );
