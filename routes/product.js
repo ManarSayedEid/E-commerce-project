@@ -91,6 +91,13 @@ router.patch("/:id", auth, isAdmin, async(req, res) => {
     }
 })
 
+router.get('/getallbags', async (req,res) =>{
+
+    const products = await Product.find({category: bags});
+
+   res.json(products);
+} );
+
 
 
 
