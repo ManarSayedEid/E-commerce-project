@@ -1,25 +1,30 @@
 const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
-    imagePath:{
+    imagePath: {
         type: String,
         required: true
     },
-    title:{
+    title: {
         type: String,
         required: true
     },
-    description:{
+    description: {
         type: String,
         required: true
     },
-    price:{
+    price: {
         type: Number,
         required: true
     },
     quantity: {
         type: Number,
         required: true
+    },
+    category: {
+        type: String,
+        required: [true, "a product must hava a main category"],
+        enum: ["shoes", "bags", "accessories"],
     }
 })
 
