@@ -10,6 +10,7 @@ const isAdmin = require('../middelware/isAdmin');
 
 // make orders
 router.post("/", auth, async(req, res) => {
+    // let {cartItems} = req.body;
     try {
         const user = await User.findOne({ _id: req.signedData.id }).exec();
 
@@ -43,7 +44,7 @@ router.post("/", auth, async(req, res) => {
 // get all orders
 router.get("/", auth, isAdmin, async (req, res) => {
     try {
-        const orders = await Order.find({});
+        const orders = await Order.find({}).populate('cartItems.productId');
         res.status(200).json({ orders: orders });
 
     } catch (err) {
