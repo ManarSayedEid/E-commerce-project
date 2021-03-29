@@ -29,12 +29,7 @@ const schema = mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Product",
                 required: true
-            },
-            // title: { type: String, required: true },
-            // description: { type: String, required: true },
-            // price: { type: Number, required: true },
-            quantityOrdered: { type: Number, required: true },
-            // image: { type: String}
+            }
         }
     ]
 })
