@@ -12,7 +12,7 @@ const adminBro = new AdminBro({
   databases: [mongoose],
   rootPath: '/admin',
   branding: {
-    logo: 'https://imgur.com/a/RKwDxSs',
+    logo: 'https://i.imgur.com/9OozRlA.jpeg',
     companyName: 'Lady Fashion',
     softwareBrothers: false   // if Software Brothers logos should be shown in the sidebar footer
   }
