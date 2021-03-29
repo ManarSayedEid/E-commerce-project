@@ -8,6 +8,51 @@ const auth = require('../middelware/authorization');
 const isAdmin = require('../middelware/isAdmin');
 
 
+// image uploads
+
+// const multer = require("multer");
+// const sharp = require("sharp");
+// const util = require("util");
+
+// const multerStorage = multer.memoryStorage();
+
+// const multerFilter = (req, file, cb) => { 
+//     console.log("protocol", req.protocol + "://" + req.get("host"));
+  
+//     if (file.mimetype.startsWith("product")) {
+//       cb(null, true);
+//     } else {
+//       cb(new Error("not image"));
+//     }
+//   };
+//   const upload = multer({
+//     storage: multerStorage,
+//     // fileFilter: multerFilter
+//   });
+  
+//   const uploadProductImage = upload.single("image");
+  
+//   const resizeProductImage = async (req, res, next) => {
+//    try{
+//    console.log(
+//       "protocol",
+//       req.protocol + "://" + req.get("host") + "/public/img/products/"
+//     );
+//     const URL = req.protocol + "://" + req.get("host") + "/public/img/products/";
+//     console.log("protocol", req.protocol);
+//     if (!req.file) return next();
+//     req.body.image = `product-${Date.now()}.jpeg`;
+//     await sharp(req.file.buffer)
+//       .resize(500, 500)
+//       .toFormat("jpeg")
+//       .jpeg({ quality: 90 })
+//       .toFile(`public/img/products/${req.body.imagePath}`);
+//     next();
+//   }catch(err){
+//   console.log(err);
+//   }
+//   };
+
 
 
 /// get cateogry
@@ -64,12 +109,15 @@ router.get("/:id", async(req, res) => {
 })
 
 
+
 /// admin parts  create && update && delete
+
+
 
 router.post("/", auth, isAdmin, async(req, res) => {
     try {
-        const { price, title, imagePath, description, quantity } = req.body;
-        const product = await Product.create({ price, title, imagePath, description, quantity
+        const { price, title, imagePath, description, quantity, category } = req.body;
+        const product = await Product.create({ price, title, imagePath, description, quantity, category
         });
 
         
@@ -87,7 +135,7 @@ router.post("/", auth, isAdmin, async(req, res) => {
 
 // update product
 
-router.patch("/:id", auth, isAdmin, async(req, res) => {
+router.patch("/:id", auth, isAdmin,async(req, res) => {
     try {
         const product = await Product.findById(req.params.id);
 
@@ -119,6 +167,9 @@ router.patch("/:id", auth, isAdmin, async(req, res) => {
 })
 
 
+
+
+//////////////////////////////////////////////////////////////////////////
 
 
 
