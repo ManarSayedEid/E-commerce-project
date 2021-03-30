@@ -1,178 +1,137 @@
-var express = require('express');
+var express = require("express");
 
 const router = express.Router();
+const path = require("path")
 
-const Product = require('../models/product');
+const Product = require("../models/product");
 
-const auth = require('../middelware/authorization');
-const isAdmin = require('../middelware/isAdmin');
-
+const auth = require("../middelware/authorization");
+const isAdmin = require("../middelware/isAdmin");
 
 // image uploads
 
-// const multer = require("multer");
-// const sharp = require("sharp");
-// const util = require("util");
+const multer = require("multer");
 
-// const multerStorage = multer.memoryStorage();
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
-// const multerFilter = (req, file, cb) => { 
-//     console.log("protocol", req.protocol + "://" + req.get("host"));
-  
-//     if (file.mimetype.startsWith("product")) {
-//       cb(null, true);
-//     } else {
-//       cb(new Error("not image"));
-//     }
-//   };
-//   const upload = multer({
-//     storage: multerStorage,
-//     // fileFilter: multerFilter
-//   });
-  
-//   const uploadProductImage = upload.single("image");
-  
-//   const resizeProductImage = async (req, res, next) => {
-//    try{
-//    console.log(
-//       "protocol",
-//       req.protocol + "://" + req.get("host") + "/public/img/products/"
-//     );
-//     const URL = req.protocol + "://" + req.get("host") + "/public/img/products/";
-//     console.log("protocol", req.protocol);
-//     if (!req.file) return next();
-//     req.body.image = `product-${Date.now()}.jpeg`;
-//     await sharp(req.file.buffer)
-//       .resize(500, 500)
-//       .toFormat("jpeg")
-//       .jpeg({ quality: 90 })
-//       .toFile(`public/img/products/${req.body.imagePath}`);
-//     next();
-//   }catch(err){
-//   console.log(err);
-//   }
-//   };
+const upload = multer({ storage: storage });
 
 
 
 /// get cateogry
-router.get('/bags', async (req,res) =>{
+router.get("/bags", async (req, res) => {
+  const products = await Product.find({ category: "bags" }).exec();
 
-    const products = await Product.find({category: 'bags' }).exec();
+  res.json(products);
+});
 
-   res.json(products);
-} );
+router.get("/shoes", async (req, res) => {
+  const products = await Product.find({ category: "shoes" }).exec();
 
-router.get('/shoes', async (req,res) =>{
+  res.json(products);
+});
 
-    const products = await Product.find({category: "shoes" }).exec();
+router.get("/accessories", async (req, res) => {
+  const products = await Product.find({ category: "accessories" }).exec();
 
-   res.json(products);
-} );
-
-router.get('/accessories', async (req,res) =>{
-
-    const products = await Product.find({category: "accessories" }).exec();
-
-   res.json(products);
-} );
-
-
-
+  res.json(products);
+});
 
 // seeding the product page
-router.get('/', async (req,res) =>{
+router.get("/", async (req, res) => {
+  const products = await Product.find({});
 
-     const products = await Product.find({});
-
-    res.json(products);
-} );
-
+  res.json(products);
+});
 
 // click on product
-router.get("/:id", async(req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
 
-        if (!product) {
-            res.status(404).json({
-                error: "Product not found"
-            });
-        }
-
-        res.status(200).json(product);
-    } catch (err) {
-        res.status(500).json({
-            error: err.message
-        })
+    if (!product) {
+      res.status(404).json({
+        error: "Product not found",
+      });
     }
-})
 
-
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
+});
 
 /// admin parts  create && update && delete
 
-
-
-router.post("/", auth, isAdmin, async(req, res) => {
+router.post(
+  "/",
+  upload.single("imagePath"),
+  auth,
+  isAdmin,
+  async (req, res) => {
     try {
-        const { price, title, imagePath, description, quantity, category } = req.body;
-        const product = await Product.create({ price, title, imagePath, description, quantity, category
-        });
+      console.log(req.file);
+      const { price, title, description, quantity, category } = req.body;
+      const product = await Product.create({
+        price,
+        title,
+        description,
+        quantity,
+        category,
+      });
 
-        
-
-        res.status(201).json({
-            product: product
-        });
-
+      res.status(201).json({
+        product: product,
+      });
     } catch (err) {
-        res.json({
-            error: err.message
-        })
+      res.json({
+        error: err.message,
+      });
     }
-})
+  }
+);
 
 // update product
 
-router.patch("/:id", auth, isAdmin,async(req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
+router.patch("/:id", auth, isAdmin, async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
 
-        if (!product) {
-            res.status(404).json({
-                error: "Product not found"
-            });
-        }
-
-        const { title, imagePath, description, price, quantity } = req.body;
-
-        product.title = title;
-        product.imagePath = imagePath;
-        product.description = description;
-        product.price = price;
-        product.quantity = quantity;
-
-        const updatedProduct = await product.save();
-
-        res.status(200).json({
-            product: updatedProduct
-        });
-
-    } catch (err) {
-        res.json({
-            error: err.message
-        });
+    if (!product) {
+      res.status(404).json({
+        error: "Product not found",
+      });
     }
-})
 
+    const { title, imagePath, description, price, quantity } = req.body;
 
+    product.title = title;
+    product.imagePath = imagePath;
+    product.description = description;
+    product.price = price;
+    product.quantity = quantity;
 
+    const updatedProduct = await product.save();
+
+    res.status(200).json({
+      product: updatedProduct,
+    });
+  } catch (err) {
+    res.json({
+      error: err.message,
+    });
+  }
+});
 
 //////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 module.exports = router;

@@ -57,5 +57,5 @@ app.use('/admin', admin);
 // })
 
 app.listen(process.env.PORT || 3000, ()=>{
-    console.log('Server Listening at port 3000 ')
+    console.log('Server Listening')
 })

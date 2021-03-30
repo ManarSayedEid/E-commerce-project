@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema({
     imagePath: {
         type: String,
-        required: true
+        // required: true
     },
     title: {
         type: String,
