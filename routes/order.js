@@ -5,6 +5,7 @@ const Order = require('../models/order');
 const User = require('../models/user');
 const auth = require('../middelware/authorization');
 const isAdmin = require('../middelware/isAdmin');
+const Product = require('../models/product');
 
 
 
@@ -58,13 +59,16 @@ router.get("/myorders", auth, async (req, res) => {
     try {
 
         const user = await User.findOne({ _id: req.signedData.id }).exec();
-        const myorders = await Order.find({ user: user._id });
+        const myorders = await Order.find({ user: user._id }).populate('cartItems.productId');
+        // const product = await Product.find({ _id: myorders.cartItems})
 
         if (!myorders) {
             throw new Error("You don't have any orders");
         }
 
-        res.status(200).json({ orders: myorders });
+        res.status(200).json( myorders );
+        // res.status(200).json({ order: product });
+
     } catch (err) {
         res.json({ error: err.message });
     }

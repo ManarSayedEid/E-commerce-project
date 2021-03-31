@@ -11,6 +11,23 @@ const isAdmin = require('../middelware/isAdmin');
 
 
 
+// image uploads
+
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+
+
 // sign up new users
 router.post('/signup', async (req, res) => {
     try {
@@ -98,7 +115,7 @@ router.get('/profile', auth, async (req, res) => {
 })
 
 // update user profile
-router.patch("/profile", auth, async (req, res) => {
+router.patch("/profile", upload.single("image"), auth, async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.signedData.id }).exec();
 
